@@ -6,11 +6,12 @@ metadata:
 spec:
   project: test-project
   source:
-    repoURL: https://github.com/divya96-sudo/argocd-platfrom-config.git
+    repoURL: https://github.com/divya96-sudo/argocd-front-backend-config.git
     targetRevision: HEAD
     path: frontend-config
   destination:
     server: https://kubernetes.default.svc
+    namespace: app-ns
   syncPolicy:
     automated:  
       prune: true
@@ -26,11 +27,12 @@ metadata:
 spec:
   project: test-project
   source:
-    repoURL: https://github.com/divya96-sudo/argocd-platfrom-config.git
+    repoURL: https://github.com/divya96-sudo/argocd-front-backend-config.git
     targetRevision: HEAD
     path: backend-config
   destination:
     server: https://kubernetes.default.svc
+    namespace: app-ns
   syncPolicy:
     automated:  
       prune: true
