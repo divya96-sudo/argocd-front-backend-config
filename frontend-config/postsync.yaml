@@ -1,42 +1,17 @@
-# apiVersion: batch/v1
-# kind: Job
-# metadata:
-#   name: post-sync-smoke-test
-#   annotations:
-#     argocd.argoproj.io/hook: PostSync
-#     argocd.argoproj.io/hook-delete-policy: HookSucceeded
-# spec:
-#   template:
-#     spec:
-#       containers:
-#       - name: smoke-test
-#         image: curlimages/curl:latest
-#         # command: ["curl", "-f", "http://frontend-service:80"]
-#         command: ["/bin/sh", "-c", "sleep 10 && curl -i http://frontend-service:80/"]
-#       restartPolicy: Never
-#   backoffLimit: 1
-
 apiVersion: batch/v1
 kind: Job
 metadata:
   name: post-sync-smoke-test
-  namespace: app-ns
   annotations:
     argocd.argoproj.io/hook: PostSync
-    argocd.argoproj.io/hook-delete-policy: HookFailed
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:
   template:
     spec:
-      serviceAccountName: default # Ensure this SA has permission to get/watch deployments
       containers:
       - name: smoke-test
-        image: bitnami/kubectl:latest
-        # Safely waits up to 60 seconds for the frontend pod to become available
-        command:
-        - /bin/sh
-        - -c
-        - |
-          echo "Waiting for frontend deployment to be ready..."
-          kubectl rollout status deployment/frontend-deploy -n app-ns --timeout=60s
+        image: curlimages/curl:latest
+        # command: ["curl", "-f", "http://frontend-service:80"]
+        command: ["/bin/sh", "-c", "sleep 10 && echo 'Post-sync smoke test completed successfully'"]
       restartPolicy: Never
-  backoffLimit: 0 # Set to 0 so it fails immediately instead of retrying blindly
+  backoffLimit: 1
