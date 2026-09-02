@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-migration-hook
+  namespace: app-ns
+  annotations:
+    # Tells Argo CD this is a PreSync hook
+    argocd.argoproj.io/hook: PreSync
+    # Deletes the job automatically after it succeeds
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      containers:
+      - name: migrate
+        image: alpine:latest
+        command: ["sh", "-c", "echo 'Running database migration...' && sleep 5"]
+      restartPolicy: Never
+  backoffLimit: 1
