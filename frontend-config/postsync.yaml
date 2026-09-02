@@ -11,6 +11,6 @@ spec:
       containers:
       - name: smoke-test
         image: curlimages/curl:latest
-        command: ["curl", "-f", "http://frontend-service/healthz"]
+        command: ["curl", "-f", "http://frontend-service:80"]
       restartPolicy: Never
   backoffLimit: 1
