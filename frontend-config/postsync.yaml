@@ -11,6 +11,7 @@ spec:
       containers:
       - name: smoke-test
         image: curlimages/curl:latest
-        command: ["curl", "-f", "http://frontend-service:80"]
+        # command: ["curl", "-f", "http://frontend-service:80"]
+        command: ["/bin/sh", "-c", "sleep 10 && curl -i http://frontend-service:80/"]
       restartPolicy: Never
   backoffLimit: 1
