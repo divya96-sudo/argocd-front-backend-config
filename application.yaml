@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: frontend-app
+spec:
+  project: test-project
+  source:
+    repoURL: https://github.com/divya96-sudo/argocd-platfrom-config.git
+    targetRevision: HEAD
+    path: .
+  destination:
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:  
+      prune: true
+      selfHeal: true
