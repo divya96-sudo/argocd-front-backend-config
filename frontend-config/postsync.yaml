@@ -5,7 +5,7 @@ metadata:
   annotations:
     argocd.argoproj.io/hook: PostSync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
-    argocd.argoproj.io/hook: Skip
+    # argocd.argoproj.io/hook: Skip
 spec:
   template:
     spec:
@@ -15,4 +15,3 @@ spec:
         # command: ["curl", "-f", "http://frontend-service:80"]
         command: ["/bin/sh", "-c", "sleep 10 && echo 'Post-sync smoke test completed successfully'"]
       restartPolicy: Never
-  backoffLimit: 1
