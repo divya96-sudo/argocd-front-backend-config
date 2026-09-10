@@ -8,9 +8,9 @@ spec:
   source:
     repoURL: https://github.com/divya96-sudo/argocd-front-backend-config.git
     targetRevision: HEAD
-    path: nginx
-    directory:
-      recurse: true
+    path: .
+    #directory:
+    #  recurse: true
   destination:
     server: https://kubernetes.default.svc
     namespace: nginx-ns
