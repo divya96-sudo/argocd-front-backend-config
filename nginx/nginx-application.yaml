@@ -4,7 +4,7 @@ metadata:
   name: nginx-app
   namespace: argocd
 spec:
-  project: test-project
+  project: default
   source:
     repoURL: https://github.com/divya96-sudo/argocd-front-backend-config.git
     targetRevision: HEAD
